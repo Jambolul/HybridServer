@@ -1,7 +1,7 @@
 import express from 'express';
-import { deleteFile, uploadFile } from '../controllers/uploadController';
-import multer, { FileFilterCallback } from 'multer';
-import { authenticate, makeThumbnail } from '../../middlewares';
+import {deleteFile, uploadFile} from '../controllers/uploadController';
+import multer, {FileFilterCallback} from 'multer';
+import {authenticate, makeThumbnail} from '../../middlewares';
 
 const fileFilter = (
   request: express.Request,
@@ -14,8 +14,7 @@ const fileFilter = (
     cb(null, false);
   }
 };
-
-const upload = multer({ dest: './uploads/', fileFilter });
+const upload = multer({dest: './uploads/', fileFilter});
 const router = express.Router();
 
 /**
@@ -39,7 +38,6 @@ const router = express.Router();
  *       "thumbnail": "https://example.com/thumbnails/example_thumb.jpg"
  *     }
  */
-router.post('/upload', authenticate, upload.single('file'), makeThumbnail, uploadFile);
 
 /**
  * @api {delete} /delete/:filename Delete File
@@ -58,6 +56,10 @@ router.post('/upload', authenticate, upload.single('file'), makeThumbnail, uploa
  *       "message": "File deleted successfully"
  *     }
  */
-router.delete('/delete/:filename', authenticate, deleteFile);
+router
+  .route('/upload')
+  .post(authenticate, upload.single('file'), makeThumbnail, uploadFile);
+
+router.route('/delete/:filename').delete(authenticate, deleteFile);
 
 export default router;
