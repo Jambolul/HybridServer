@@ -1,10 +1,10 @@
-import express, {Request} from 'express';
-import {deleteFile, uploadFile} from '../controllers/uploadController';
-import multer, {FileFilterCallback} from 'multer';
-import {authenticate, makeThumbnail} from '../../middlewares';
+import express from 'express';
+import { deleteFile, uploadFile } from '../controllers/uploadController';
+import multer, { FileFilterCallback } from 'multer';
+import { authenticate, makeThumbnail } from '../../middlewares';
 
 const fileFilter = (
-  request: Request,
+  request: express.Request,
   file: Express.Multer.File,
   cb: FileFilterCallback
 ) => {
@@ -14,15 +14,50 @@ const fileFilter = (
     cb(null, false);
   }
 };
-const upload = multer({dest: './uploads/', fileFilter});
+
+const upload = multer({ dest: './uploads/', fileFilter });
 const router = express.Router();
 
-// TODO: validation
+/**
+ * @api {post} /upload Upload File
+ * @apiName UploadFile
+ * @apiGroup File
+ *
+ * @apiHeader {String} Authorization User's authentication token.
+ *
+ * @apiParam {File} file File to be uploaded. Supported file types: image, video.
+ *
+ * @apiSuccess {String} message Success message.
+ * @apiSuccess {String} filename Name of the uploaded file.
+ * @apiSuccess {String} thumbnail URL of the generated thumbnail (if applicable).
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "message": "File uploaded successfully",
+ *       "filename": "example.jpg",
+ *       "thumbnail": "https://example.com/thumbnails/example_thumb.jpg"
+ *     }
+ */
+router.post('/upload', authenticate, upload.single('file'), makeThumbnail, uploadFile);
 
-router
-  .route('/upload')
-  .post(authenticate, upload.single('file'), makeThumbnail, uploadFile);
-
-router.route('/delete/:filename').delete(authenticate, deleteFile);
+/**
+ * @api {delete} /delete/:filename Delete File
+ * @apiName DeleteFile
+ * @apiGroup File
+ *
+ * @apiHeader {String} Authorization User's authentication token.
+ *
+ * @apiParam {String} filename Name of the file to be deleted.
+ *
+ * @apiSuccess {String} message Success message.
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "message": "File deleted successfully"
+ *     }
+ */
+router.delete('/delete/:filename', authenticate, deleteFile);
 
 export default router;
