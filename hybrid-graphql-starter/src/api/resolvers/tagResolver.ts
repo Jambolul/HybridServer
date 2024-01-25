@@ -1,5 +1,5 @@
-import { MediaItem } from '@sharedTypes/DBTypes';
-import {fetchAllTags, fetchTagsByMediaId} from '../models/tagModel';
+import { MediaItem, Tag } from '@sharedTypes/DBTypes';
+import {fetchAllTags, fetchTagsByMediaId, postTag} from '../models/tagModel';
 
 export default {
   MediaItem: {
@@ -12,5 +12,13 @@ export default {
         tags: async () => {
             return await fetchAllTags();
         },
+    },
+    Mutation: {
+      createTag: async (
+        _parent: undefined,
+        args: {input: Omit<Tag, 'tag_id'>},
+        ) => {
+          return postTag(args.input);
+        }
     },
 };
