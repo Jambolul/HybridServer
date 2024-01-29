@@ -1,6 +1,10 @@
 type Tag {
-  tag_id; ID!
+  tag_id: ID!
   tag_name: String!
+}
+
+type Message {
+  message: String!
 }
 
 type Query {
@@ -8,10 +12,10 @@ type Query {
 }
 
 input TagInput {
-  tag_id: ID!
   tag_name: String!
 }
 
 type Mutation {
   createTag(input: TagInput!): Tag
+  deleteTag(input: ID!): Message
 }

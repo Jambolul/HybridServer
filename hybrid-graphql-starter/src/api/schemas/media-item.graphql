@@ -9,6 +9,12 @@ type MediaItem {
   description: String
   created_at: String!
   tags: [Tag]
+  owner: User
+}
+
+type MediaResponse {
+  message: String!
+  media: MediaItem!
 }
 
 type Query {
@@ -18,19 +24,25 @@ type Query {
 }
 
 input MediaItemInput {
-  user_id: ID!
-  thumbnail: String!
+  filename: String!
   filesize: Int!
   media_type: String!
   title: String!
   description: String
+}
 
-  input AddTagToMediaItemInput {
-    media_id: ID!
-    tag_name: String!
-  }
+input MediaItemUpdateInput {
+  title: String
+  description: String
+}
+
+input AddTagToMediaItemInput {
+  media_id: ID!
+  tag_name: String!
+}
 
 type Mutation {
   createMediaItem(input: MediaItemInput!): MediaItem
   addTagToMediaItem(input: AddTagToMediaItemInput!): MediaItem
+  updateMediaItem(input: MediaItemUpdateInput!, media_id: ID!): MediaResponse
 }
