@@ -40,7 +40,7 @@
 
 - If the page is refreshed for example in the profile page, you get a "Not Found" page.
 
-- ![picture of the database](image.png)
+- ![picture of the database](dbdiagram.png)
 
 ```sql
 -- Drop the database if it exists and then create it
@@ -137,8 +137,8 @@ CREATE TABLE MediaItemStatus (
 
 ## Screenshots
 
-![picture of the homepage](image-1.png)
-![profile page](image-2.png)
-![upload page](image-3.png)
-![viewpage part1](image-4.png)
-![viewpage part2](image-5.png)
+![picture of the homepage](homepage.png)
+![profile page](profilepage.png)
+![upload page](uploadpage.png)
+![viewpage part1](viewpage1.png)
+![viewpage part2](viewpage2.png)
