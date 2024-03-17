@@ -40,7 +40,7 @@
 
 - If the page is refreshed for example in the profile page, you get a "Not Found" page.
 
-- ![picture of the database](dbdiagram.png)
+- [picture of the database](https://github.com/Jambolul/HybridServer/blob/main/screenshots/dbdiagram.png)
 
 ```sql
 -- Drop the database if it exists and then create it
@@ -137,7 +137,7 @@ CREATE TABLE MediaItemStatus (
 
 ## Screenshots
 
-![picture of the homepage](homepage.png)
+![picture of the homepage](https://github.com/Jambolul/HybridServer/blob/main/screenshots/homepage.png)
 ![profile page](profilepage.png)
 ![upload page](uploadpage.png)
 ![viewpage part1](viewpage1.png)
