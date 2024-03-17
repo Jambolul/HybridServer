@@ -34,11 +34,10 @@ export default {
     },
     createTag: async (
       _parent: undefined,
-      args: {input: {tag_name: string; media_id: string}}, // Adjusted to destructure input
+      args: {input: {tag_name: string; media_id: string}},
     ) => {
-      const {tag_name, media_id} = args.input; // Destructuring input to access tag_name and media_id
+      const {tag_name, media_id} = args.input;
 
-      // capitalize first letter of tag_name to ensure uniform format in the database
       const formattedTagName =
         tag_name.charAt(0).toUpperCase() + tag_name.slice(1).toLowerCase();
 
@@ -54,8 +53,7 @@ export default {
           extensions: {code: 'NOT_AUTHORIZED'},
         });
       }
-      // Here you might want to add additional checks, for example,
-      // to verify if the user is allowed to delete the tag from the media item.
+
       return await deleteTagFromMedia(
         Number(args.input.tag_id),
         Number(args.input.media_id),

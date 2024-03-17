@@ -10,7 +10,6 @@ import {
 export default {
   MediaItem: {
     status: async (parent: {media_id: number}) => {
-      // Assuming each media item has only one status at a time
       return await fetchStatusByMediaId(parent.media_id);
     },
   },
@@ -30,7 +29,6 @@ export default {
           extensions: {code: 'NOT_AUTHORIZED'},
         });
       }
-      // Assume createStatus returns the created status object
       return await createStatus(args.status_name);
     },
     updateMediaItemStatus: async (
@@ -43,8 +41,6 @@ export default {
           extensions: {code: 'NOT_AUTHORIZED'},
         });
       }
-      // You might want to check if the user is the owner of the media item or an admin before allowing the update
-      // This logic is not shown here and would depend on your application's specific authorization requirements
       return await updateMediaItemStatus(args.media_id, args.status_id);
     },
   },
