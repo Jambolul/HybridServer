@@ -40,6 +40,8 @@
 
 - If the page is refreshed for example in the profile page, you get a "Not Found" page.
 
+## Database structure
+
 - ![picture of the database](https://github.com/Jambolul/HybridServer/blob/main/screenshots/dbdiagram.png)
 
 ```sql
