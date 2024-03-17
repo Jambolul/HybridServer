@@ -55,18 +55,7 @@ type Tag = {
 
 // copying the idea of tags on status
 
-type Status = {
-  status_id: number;
-  status_name: "Watching" | "Completed" | "Dropped" | "Plan to Watch";
-};
 
-type MediaItemStatus = {
-  media_id: number;
-  status_id: number;
-  user_id: number;
-};
-
-type MediaItemStatusResult = MediaItemStatus & Status;
 
 type MediaItemTag = {
   media_id: number;
@@ -76,6 +65,18 @@ type MediaItemTag = {
 
 
 type TagResult = MediaItemTag & Tag;
+
+type Status = {
+  status_id: number;
+  status_name: string;
+};
+
+type MediaItemStatus = {
+  media_id: number;
+  status_id: number;
+};
+
+type StatusResult = MediaItemStatus & Status;
 
 type UploadResult = {
   message: string;
@@ -115,6 +116,7 @@ type FileInfo = {
 };
 
 export type {
+  Status,
   UserLevel,
   User,
   MediaItem,
@@ -131,5 +133,5 @@ export type {
   TokenContent,
   MediaItemWithOwner,
   FileInfo,
-  MediaItemStatusResult
+  StatusResult,
 };

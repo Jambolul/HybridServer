@@ -1,0 +1,38 @@
+type Status {
+  status_id: ID
+  status_name: String
+}
+
+type Query {
+  statuses: [Status]
+  statusByMediaId(media_id: ID!): Status
+}
+
+input StatusInput {
+  status_name: String
+}
+
+input MediaStatusInput {
+  media_id: ID!
+  status_id: ID!
+}
+
+type Mutation {
+  """
+  Requires admin authorization token
+  """
+  createStatus(input: StatusInput!): Status
+  """
+  Requires admin authorization token
+  """
+  deleteStatus(input: ID!): Message
+  """
+  Allows updating the status of a specific media item.
+  Requires authorization token.
+  """
+  updateMediaItemStatus(input: MediaStatusInput!): Message
+}
+
+type Message {
+  message: String!
+}
